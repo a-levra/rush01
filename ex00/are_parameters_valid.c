@@ -6,12 +6,9 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:17:33 by alevra            #+#    #+#             */
-/*   Updated: 2022/07/16 14:19:13 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/07/16 14:29:08 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-#include<stdio.h>
 
 int	value_is_valid(int value, int side_size);
 

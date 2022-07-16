@@ -6,13 +6,13 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:17:33 by alevra            #+#    #+#             */
-/*   Updated: 2022/07/16 14:29:08 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/07/16 14:39:05 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	value_is_valid(int value, int side_size);
 
-int	are_parameters_valid(int **visible_boxes, int width, int height)
+int	are_parameters_valid(int **parameters, int width, int height)
 {
 	int	side;
 	int	j;
@@ -28,7 +28,7 @@ int	are_parameters_valid(int **visible_boxes, int width, int height)
 			side_size = height;
 		while (j < side_size)
 		{
-			if (!(value_is_valid(visible_boxes[side][j], side_size)))
+			if (!(value_is_valid(parameters[side][j], side_size)))
 			{
 				return (0);
 			}

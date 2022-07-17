@@ -6,13 +6,18 @@
 /*   By: ldurieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 05:26:51 by ldurieux          #+#    #+#             */
-/*   Updated: 2022/07/16 07:05:02 by ldurieux         ###   ########lyon.fr   */
+/*   Updated: 2022/07/17 18:20:22 by ldurieux         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 
-int	**handle_args(int argc, char **argv, int accept_size);
+int		**handle_args(int argc, char **argv);
+int		solver(int **parameters, char ***board);
+int		make_board(char ***board);
+void	fill_board(char ***board);
+void	print_board(char ***board);
 
 int	error(void)
 {
@@ -22,24 +27,21 @@ int	error(void)
 
 int	main(int argc, char**argv)
 {
-	int	**board;
-	int	width;
-	int	height;
+	int		**parameters;
+	char	***board;
 
-	board = handle_args(argc, argv, 1);
+	board = 0;
+	parameters = handle_args(argc, argv);
+	if (!parameters)
+		return (error());
+	board = malloc(sizeof(char **) * 4);
 	if (!board)
 		return (error());
-	width = board[0][0];
-	height = board[0][1];
-
-	for(int i = 0; i < 4; i++)
-	{
-		for(int j = 0; j < board[0][i / 2]; j++)
-		{
-			printf("%d ", board[i + 1][j]);
-		}
-		printf("\n");
-	}
-
+	if (!make_board(board))
+		return (error());
+	fill_board(board);
+	if (!solver(parameters, board))
+		return (error());
+	print_board(board);
 	return (0);
 }

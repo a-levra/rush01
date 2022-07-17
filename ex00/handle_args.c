@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 10:21:51 by alevra            #+#    #+#             */
-/*   Updated: 2022/07/17 17:59:28 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/07/17 18:26:08 by ldurieux         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	**handle_args(int argc, char **argv)
 	while (i < 4)
 		params[i++] = malloc(sizeof(int) * 4);
 	i = 0;
-	if (ft_strlen(argv[0]) != 31)
+	if (ft_strlen(argv[1]) != 31)
 		return (error);
-	if (!check_and_copy(argv[0], params))
+	if (!check_and_copy(argv[1], params))
 		return (error);
 	return (params);
 }

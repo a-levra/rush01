@@ -6,38 +6,44 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 10:21:51 by alevra            #+#    #+#             */
-/*   Updated: 2022/07/17 18:26:08 by ldurieux         ###   ########lyon.fr   */
+/*   Updated: 2022/07/17 21:20:57 by ldurieux         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdlib.h>
 
-int	char_is_valid_number(char c);
-int	char_is_space(char c);
-int	ft_strlen(char *str);
-int	check_and_copy(char *str, int **params);
+void	free_array(int **array);
+int		char_is_valid_number(char c);
+int		ft_strlen(char *str);
+int		check_and_copy(char *str, int **params);
 
-int	**handle_args(int argc, char **argv)
+int	handle_args(int argc, char **argv, int ***params)
 {
 	unsigned int	i;
 	unsigned int	j;
-	int				**params;
-	void			*error;
 
-	error = NULL;
-	i = 0;
+	i = -1;
 	j = 0;
 	if (argc != 2)
-		return (error);
-	params = malloc(sizeof(int *) * 4);
-	while (i < 4)
-		params[i++] = malloc(sizeof(int) * 4);
+		return (0);
+	*params = malloc(sizeof(int *) * 4);
+	while (++i)
+		(*params)[i] = 0;
+	i = -1;
+	if (!(*params))
+		return (0);
+	while (++i < 4)
+	{
+		(*params)[i] = malloc(sizeof(int) * 4);
+		if (!(*params)[i])
+			return (0);
+	}
 	i = 0;
 	if (ft_strlen(argv[1]) != 31)
-		return (error);
-	if (!check_and_copy(argv[1], params))
-		return (error);
-	return (params);
+		return (0);
+	if (!check_and_copy(argv[1], *params))
+		return (0);
+	return (1);
 }
 
 int	check_and_copy(char *str, int **params)
@@ -60,7 +66,7 @@ int	check_and_copy(char *str, int **params)
 				return (0);
 		}
 		else
-			if (!(char_is_space(str[i])))
+			if (str[i] != ' ')
 				return (0);
 		i++;
 	}
@@ -88,10 +94,15 @@ int	char_is_valid_number(char c)
 		return (0);
 }
 
-int	char_is_space(char c)
+void	free_array(int **array)
 {
-	if (c == ' ')
-		return (1);
-	else
-		return (0);
+	int	i;
+
+	i = -1;
+	if (!array)
+		return ;
+	while (++i < 4)
+		if (array[i])
+			free(array[i]);
+	free(array);
 }
